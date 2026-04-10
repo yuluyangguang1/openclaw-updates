@@ -8,7 +8,7 @@
 <meta http-equiv="Expires" content="0">
 <title>OpenClaw 中文更新日志 - OpenClaw 版本更新记录</title>
 <meta name="description" content="OpenClaw 中文更新日志，实时追踪 OpenClaw 每个版本的更新内容、新功能、修复和安全变更。第一时间获取版本更新通知。">
-<meta name="keywords" content="OpenClaw,更新日志,changelog,版本更新,中文更新日志,OpenClaw更新,release notes">
+<meta name="keywords" content="OpenClaw,更新日志,changelog,版本更新,中文更新日志,OpenClaw更新,OpenClawPortable,便携版,release notes">
 <meta name="author" content="OpenClaw">
 <meta name="robots" content="index, follow">
 
@@ -17,6 +17,8 @@
 <meta property="og:description" content="实时追踪 OpenClaw 每个版本的更新内容，第一时间获取版本更新通知。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://yuluyangguang1.github.io/openclaw-updates/">
+<meta property="og:site_name" content="OpenClaw 中文更新日志">
 
 <!-- Twitter 卡片 -->
 <meta name="twitter:card" content="summary">
@@ -40,7 +42,7 @@
 }
 </script>
 
-<link rel="canonical" href="">
+<link rel="canonical" href="https://yuluyangguang1.github.io/openclaw-updates/">
 <style>
   :root {
     --primary: #FF6B35;
@@ -656,6 +658,7 @@
   .tag-patch { background: rgba(0,229,204,0.12); color: var(--accent); }
   .tag-new { background: rgba(254,202,87,0.12); color: var(--warning); }
   .tag-sync { background: rgba(0,229,204,0.1); color: var(--accent); font-size: 11px; }
+  .tag-portable { background: rgba(167,139,250,0.12); color: #A78BFA; }
 
   .update-date {
     font-size: 13px;
@@ -1134,6 +1137,95 @@
     border-top: 1px solid var(--border);
     margin-top: 40px;
   }
+
+  /* ===== 标签切换 ===== */
+  .tab-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin: 24px auto 0;
+    background: var(--bg-card);
+    border-radius: var(--radius-full);
+    padding: 4px;
+    border: 1px solid var(--border);
+    width: fit-content;
+  }
+
+  .tab-btn {
+    padding: 10px 28px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover {
+    color: var(--text);
+    background: var(--bg-card-hover);
+  }
+
+  .tab-btn.active {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: var(--glow-primary);
+  }
+
+  .tab-btn.active[data-tab="portable"] {
+    background: #A78BFA;
+    box-shadow: 0 0 20px rgba(167,139,250,0.4);
+  }
+
+  .tab-btn .tab-emoji {
+    font-size: 18px;
+  }
+
+  /* 便携版主题覆盖 */
+  body.portable-mode .update-card.latest {
+    border-color: rgba(167,139,250,0.4);
+    box-shadow: 0 0 24px rgba(167,139,250,0.15);
+  }
+
+  body.portable-mode .update-card.new-unread {
+    border-color: rgba(167,139,250,0.6);
+    animation: portablePulse 2s ease-in-out infinite;
+  }
+
+  body.portable-mode .version-badge {
+    background: rgba(167,139,250,0.15);
+    border: 1px solid rgba(167,139,250,0.3);
+  }
+
+  body.portable-mode .version-badge .dot {
+    background: #A78BFA;
+    box-shadow: 0 0 8px rgba(167,139,250,0.6);
+  }
+
+  body.portable-mode .tag-portable {
+    background: rgba(167,139,250,0.2);
+    color: #A78BFA;
+  }
+
+  body.portable-mode .update-card:hover {
+    border-color: rgba(167,139,250,0.3);
+  }
+
+  body.portable-mode .change-icon.added {
+    background: rgba(167,139,250,0.15);
+    color: #A78BFA;
+  }
+
+  @keyframes portablePulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(167,139,250,0.15); }
+    50% { box-shadow: 0 0 28px rgba(167,139,250,0.35); }
+  }
 </style>
 </head>
 <body>
@@ -1200,6 +1292,16 @@
       <span class="dot"></span>
       <span id="latestVersionText">加载中...</span>
     </div>
+  </div>
+
+  <!-- 标签切换：标准版 / 便携版 -->
+  <div class="tab-switcher">
+    <button class="tab-btn active" data-tab="standard" onclick="switchTab('standard')">
+      <span class="tab-emoji">🦞</span> 标准版
+    </button>
+    <button class="tab-btn" data-tab="portable" onclick="switchTab('portable')">
+      <span class="tab-emoji">🎒</span> 便携版
+    </button>
   </div>
 
   <!-- 统计 -->
@@ -6216,6 +6318,29 @@ const UPDATES_DATA = [
 ];
 
 // ============================================================
+// 便携版更新数据 — 在此添加便携版新版本更新内容
+// ============================================================
+const PORTABLE_UPDATES_DATA = [
+  {
+    version: "2026.4.9",
+    tag: "portable",
+    date: "2026-04-09",
+    title: "OpenClawPortable 首个便携版发布",
+    desc: "首个 OpenClawPortable 便携版正式发布！基于 OpenClaw 2026.4.9 标准版，无需安装，解压即用。内置独立运行环境，不污染系统注册表，支持 U 盘随身携带。",
+    changes: [
+      { type: "added", text: "便携版独立运行环境，无需安装，解压即用" },
+      { type: "added", text: "支持 U 盘随身携带，数据与程序一体化" },
+      { type: "added", text: "不写入系统注册表，不残留系统文件" },
+      { type: "added", text: "内置记忆梦境系统与多频道支持" },
+      { type: "added", text: "自动检测并适配本地网络环境" },
+      { type: "fixed", text: "修复浏览器主框架导航安全隔离问题" },
+      { type: "fixed", text: "修复 dotenv 环境变量注入安全漏洞" },
+      { type: "fixed", text: "修复多个频道 npm 构建导致的启动问题" }
+    ]
+  }
+];
+
+// ============================================================
 // 配置
 // ============================================================
 const CONFIG = {
@@ -6226,9 +6351,47 @@ const CONFIG = {
 };
 
 // ============================================================
+// 标签切换：标准版 / 便携版
+// ============================================================
+let currentTab = 'standard';
+
+function switchTab(tab) {
+  currentTab = tab;
+  // 更新按钮状态
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  // 更新页面主题
+  document.body.classList.toggle('portable-mode', tab === 'portable');
+  // 更新 Hero 文案
+  const heroTitle = document.querySelector('.hero h1');
+  const heroDesc = document.querySelector('.hero p');
+  const heroIcon = document.querySelector('.hero-icon');
+  if (tab === 'portable') {
+    heroTitle.textContent = '便携版更新日志';
+    heroDesc.textContent = '查看 OpenClawPortable 便携版的最新版本更新内容，免安装即用，随身携带';
+    heroIcon.style.filter = 'hue-rotate(200deg)';
+  } else {
+    heroTitle.textContent = '更新日志';
+    heroDesc.textContent = '查看 OpenClaw 的最新版本更新内容，每次更新都会在这里第一时间通知你';
+    heroIcon.style.filter = '';
+  }
+  // 重新渲染
+  renderTimeline();
+  // 滚动到顶部
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
 // 工具函数
 // ============================================================
 function getAllUpdates() {
+  if (currentTab === 'portable') {
+    const extraRaw = localStorage.getItem('openclaw_portable_extra_updates');
+    const extraUpdates = extraRaw ? JSON.parse(extraRaw) : [];
+    const all = [...extraUpdates, ...PORTABLE_UPDATES_DATA];
+    return all.sort((a, b) => compareVersions(b.version, a.version));
+  }
   // 合并内置数据、localStorage 手动添加、GitHub 同步数据
   const extraRaw = localStorage.getItem(CONFIG.UPDATES_KEY);
   const extraUpdates = extraRaw ? JSON.parse(extraRaw) : [];
@@ -6282,11 +6445,13 @@ function compareVersions(a, b) {
 }
 
 function getLastSeenVersion() {
-  return localStorage.getItem(CONFIG.STORAGE_KEY) || '';
+  const key = currentTab === 'portable' ? 'openclaw_portable_last_read' : CONFIG.STORAGE_KEY;
+  return localStorage.getItem(key) || '';
 }
 
 function setLastSeenVersion(v) {
-  localStorage.setItem(CONFIG.STORAGE_KEY, v);
+  const key = currentTab === 'portable' ? 'openclaw_portable_last_read' : CONFIG.STORAGE_KEY;
+  localStorage.setItem(key, v);
 }
 
 function formatDate(dateStr) {
@@ -6323,7 +6488,7 @@ function toggleChanges(btn) {
 }
 
 function getTagLabel(tag) {
-  const map = { major: '重大更新', minor: '功能更新', patch: '修复补丁' };
+  const map = { major: '重大更新', minor: '功能更新', patch: '修复补丁', portable: '便携版' };
   return map[tag] || tag;
 }
 
@@ -6688,7 +6853,7 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   // ========== 第一步：立即用内置数据渲染 ==========
   // UPDATES_DATA 已预嵌入全部 69 个版本，双击 HTML 即可看到所有内容
-  console.log('[OpenClaw] 内置数据共', UPDATES_DATA.length, '个版本');
+  console.log('[OpenClaw] 内置数据共', UPDATES_DATA.length, '个标准版版本，', PORTABLE_UPDATES_DATA.length, '个便携版版本');
   renderTimeline();
   setTimeout(() => { checkAndShowNotify(); }, 800);
 

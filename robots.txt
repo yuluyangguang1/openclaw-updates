@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yuluyangguang1.github.io/openclaw-updates/sitemap.xml
