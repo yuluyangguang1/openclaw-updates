@@ -1,0 +1,93 @@
+name: Fetch releases
+
+# Pulls release JSON for both the portable repo and the upstream
+# openclaw repo, writes them to /data/{portable,standard}.json so
+# the changelog page can serve a same-origin static file instead
+# of hammering the public GitHub API (which rate-limits anon
+# clients to 60 req/h per IP — a small office NAT trips that
+# during a single demo).
+#
+# Runs every 30 minutes, on workflow_dispatch, and on every push
+# that touches this workflow file.
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/fetch-releases.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-releases
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch + write JSON
+        env:
+          # GITHUB_TOKEN raises the rate limit from 60/h anon to
+          # 5000/h authenticated. We never need that headroom in
+          # practice, but it costs nothing and keeps us safe if
+          # the upstream repo gets a release flurry.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p data
+
+          fetch_repo() {
+            local repo="$1"
+            local out="$2"
+            local all="[]"
+            for page in 1 2; do
+              local resp
+              resp=$(curl -fsSL \
+                -H "Accept: application/vnd.github.v3+json" \
+                -H "Authorization: Bearer $GH_TOKEN" \
+                "https://api.github.com/repos/${repo}/releases?per_page=50&page=${page}")
+              # If the page is empty or short, we stop.
+              local n
+              n=$(echo "$resp" | jq 'length')
+              all=$(echo "[$all, $resp]" | jq 'add')
+              if [ "$n" -lt 50 ]; then break; fi
+            done
+            # Strip heavy fields (assets, body too large) — we
+            # only need what the page renders.
+            echo "$all" | jq '[.[] | select(.draft|not) | {
+              tag_name, name, body, html_url,
+              published_at, created_at, prerelease, draft
+            }]' > "$out"
+            echo "$repo  ->  $out  ($(jq 'length' < "$out") releases)"
+          }
+
+          fetch_repo "yuluyangguang1/openclaw-portable" "data/portable.json"
+          fetch_repo "openclaw/openclaw"                "data/standard.json"
+
+          # Stamp a meta file so the page can show "last sync".
+          date -u -Iseconds > data/last-sync.txt
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- data/; then
+            echo "No changes."
+            exit 0
+          fi
+          git add data/
+          git commit -m "data: refresh release feeds
+
+          source:
+            yuluyangguang1/openclaw-portable
+            openclaw/openclaw"
+          git push
