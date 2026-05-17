@@ -80,11 +80,13 @@ jobs:
           set -euo pipefail
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- data/; then
+          # Stage first so untracked-but-new files (data/*.json on
+          # the very first run) are seen by `diff --cached`.
+          git add data/
+          if git diff --cached --quiet -- data/; then
             echo "No changes."
             exit 0
           fi
-          git add data/
           git commit -m "data: refresh release feeds
 
           source:
