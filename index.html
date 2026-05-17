@@ -17,7 +17,7 @@
 <meta property="og:description" content="实时追踪 OpenClaw 每个版本的更新内容，第一时间获取版本更新通知。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:url" content="https://yuluyangguang1.github.io/openclaw-updates/">
+<meta property="og:url" content="https://yuai-r.cn/openclaw/changelog/">
 <meta property="og:site_name" content="OpenClaw 中文更新日志">
 
 <!-- Twitter 卡片 -->
@@ -42,48 +42,52 @@
 }
 </script>
 
-<link rel="canonical" href="https://yuluyangguang1.github.io/openclaw-updates/">
+<link rel="canonical" href="https://yuai-r.cn/openclaw/changelog/">
 <style>
   :root {
-    --primary: #FF6B35;
-    --primary-light: #FF8A5C;
-    --primary-dark: #E55A25;
-    --accent: #00E5CC;
-    --accent-light: #33F0DB;
-    --bg: #0A0A0A;
-    --bg-card: rgba(255,255,255,0.04);
-    --bg-card-hover: rgba(255,255,255,0.08);
-    --bg-elevated: #111111;
-    --text: #FFFFFF;
-    --text-secondary: #999999;
-    --text-muted: #666666;
-    --border: rgba(255,255,255,0.08);
-    --border-hover: rgba(255,255,255,0.15);
-    --danger: #FF4D4D;
-    --warning: #FECA57;
-    --success: #00E5CC;
+    /* yu.ai aligned palette — was OpenClaw's standalone orange/red */
+    --primary: #00ffc8;
+    --primary-light: #4dffd9;
+    --primary-dark: #00d4a8;
+    --accent: #00ffc8;
+    --accent-light: #4dffd9;
+    --bg: #041c1c;
+    --bg-card: rgba(255,230,203,0.04);
+    --bg-card-hover: rgba(255,230,203,0.08);
+    --bg-elevated: #062626;
+    --text: #ffe6cb;
+    --text-secondary: rgba(255,230,203,0.7);
+    --text-muted: rgba(255,230,203,0.45);
+    --border: rgba(255,230,203,0.12);
+    --border-hover: rgba(255,230,203,0.22);
+    --danger: #ff8a6b;
+    --warning: #ffbd38;
+    --success: #00ffc8;
     --radius: 16px;
     --radius-sm: 8px;
     --radius-full: 999px;
     --shadow: 0 4px 24px rgba(0,0,0,0.5);
-    --glow-primary: 0 0 20px rgba(255,107,53,0.3);
-    --glow-accent: 0 0 20px rgba(0,229,204,0.3);
+    --glow-primary: 0 0 20px rgba(0,255,200,0.3);
+    --glow-accent: 0 0 20px rgba(0,255,200,0.3);
   }
 
   /* ===== 白天模式 ===== */
   [data-theme="light"] {
-    --bg: #F5F5F7;
-    --bg-card: rgba(0,0,0,0.03);
-    --bg-card-hover: rgba(0,0,0,0.06);
-    --bg-elevated: #FFFFFF;
-    --text: #1A1A2E;
-    --text-secondary: #555566;
-    --text-muted: #888899;
-    --border: rgba(0,0,0,0.08);
-    --border-hover: rgba(0,0,0,0.15);
+    --bg: #f5f0e8;
+    --bg-card: rgba(61,58,53,0.03);
+    --bg-card-hover: rgba(61,58,53,0.06);
+    --bg-elevated: #fbf7ef;
+    --text: #3d3a35;
+    --text-secondary: rgba(61,58,53,0.7);
+    --text-muted: rgba(61,58,53,0.5);
+    --border: rgba(61,58,53,0.14);
+    --border-hover: rgba(61,58,53,0.25);
     --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --glow-primary: 0 0 20px rgba(255,107,53,0.15);
-    --glow-accent: 0 0 20px rgba(0,229,204,0.15);
+    --glow-primary: 0 0 20px rgba(2,150,106,0.15);
+    --glow-accent: 0 0 20px rgba(2,150,106,0.15);
+    --primary: #02966a;
+    --accent: #02966a;
+    --success: #02966a;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -104,15 +108,15 @@
   }
 
   [data-theme="light"] .navbar-brand .logo {
-    filter: drop-shadow(0 0 6px rgba(255,107,53,0.2));
+    filter: drop-shadow(0 0 6px rgba(0,255,200,0.2));
   }
 
   [data-theme="light"] .hero-icon {
-    filter: drop-shadow(0 0 14px rgba(255,107,53,0.25));
+    filter: drop-shadow(0 0 14px rgba(0,255,200,0.25));
   }
 
   [data-theme="light"] .hero-icon:hover {
-    filter: drop-shadow(0 0 20px rgba(255,107,53,0.4));
+    filter: drop-shadow(0 0 20px rgba(0,255,200,0.4));
   }
 
   [data-theme="light"] .modal {
@@ -133,7 +137,7 @@
   }
 
   [data-theme="light"] .version-badge {
-    background: rgba(255,107,53,0.1);
+    background: rgba(0,255,200,0.1);
     color: var(--primary);
   }
 
@@ -174,16 +178,16 @@
 
   [data-theme="light"] .update-card.latest::before {
     background: var(--accent);
-    box-shadow: 0 0 0 2px rgba(0,229,204,0.3), 0 0 8px rgba(0,229,204,0.2);
+    box-shadow: 0 0 0 2px rgba(0,255,200,0.3), 0 0 8px rgba(0,255,200,0.2);
   }
 
   [data-theme="light"] .update-card.new-unread::before {
     background: var(--primary);
-    box-shadow: 0 0 0 2px rgba(255,107,53,0.3), 0 0 8px rgba(255,107,53,0.2);
+    box-shadow: 0 0 0 2px rgba(0,255,200,0.3), 0 0 8px rgba(0,255,200,0.2);
   }
 
   [data-theme="light"] .timeline::before {
-    background: linear-gradient(to bottom, rgba(255,107,53,0.3), rgba(0,229,204,0.3), rgba(0,0,0,0.06));
+    background: linear-gradient(to bottom, rgba(0,255,200,0.3), rgba(0,255,200,0.3), rgba(0,0,0,0.06));
   }
 
   [data-theme="light"] .update-title {
@@ -191,32 +195,32 @@
   }
 
   [data-theme="light"] .update-desc {
-    color: #666677;
+    color: var(--text-secondary);
   }
 
   [data-theme="light"] .change-icon.added {
     background: rgba(0,200,180,0.1);
-    color: #00a08a;
+    color: var(--success);
   }
 
   [data-theme="light"] .change-icon.fixed {
-    background: rgba(255,107,53,0.1);
-    color: #d45a20;
+    background: rgba(0,255,200,0.1);
+    color: var(--accent);
   }
 
   [data-theme="light"] .change-icon.changed {
     background: rgba(200,160,30,0.1);
-    color: #b08a10;
+    color: var(--warning);
   }
 
   [data-theme="light"] .change-icon.removed {
     background: rgba(220,50,50,0.1);
-    color: #cc3333;
+    color: var(--danger);
   }
 
   [data-theme="light"] .update-changes li {
     border-bottom-color: rgba(0,0,0,0.05);
-    color: #555566;
+    color: var(--text-secondary);
   }
 
   [data-theme="light"] .update-card:hover {
@@ -232,23 +236,23 @@
   }
 
   [data-theme="light"] .update-tag.tag-major {
-    background: rgba(255,77,77,0.08);
-    color: #cc3333;
+    background: rgba(0,255,200,0.08);
+    color: var(--danger);
   }
 
   [data-theme="light"] .update-tag.tag-minor {
-    background: rgba(255,107,53,0.08);
-    color: #d45a20;
+    background: rgba(0,255,200,0.08);
+    color: var(--accent);
   }
 
   [data-theme="light"] .update-tag.tag-patch {
-    background: rgba(0,229,204,0.08);
-    color: #00a08a;
+    background: rgba(0,255,200,0.08);
+    color: var(--success);
   }
 
   [data-theme="light"] .update-tag.tag-new {
-    background: rgba(255,77,77,0.08);
-    color: #cc3333;
+    background: rgba(0,255,200,0.08);
+    color: var(--danger);
   }
 
   body::before {
@@ -261,9 +265,9 @@
       radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.6), transparent),
       radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.4), transparent),
       radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.7), transparent),
-      radial-gradient(2px 2px at 200px 60px, rgba(0,229,204,0.6), transparent),
+      radial-gradient(2px 2px at 200px 60px, rgba(0,255,200,0.6), transparent),
       radial-gradient(1px 1px at 250px 150px, rgba(255,255,255,0.5), transparent),
-      radial-gradient(2px 2px at 300px 40px, rgba(255,77,77,0.4), transparent);
+      radial-gradient(2px 2px at 300px 40px, rgba(0,255,200,0.4), transparent);
     background-size: 350px 200px;
     animation: twinkle 8s ease-in-out infinite alternate;
     pointer-events: none;
@@ -280,9 +284,9 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255,77,77,0.12), transparent 50%),
-      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,229,204,0.08), transparent 50%),
-      radial-gradient(ellipse 90% 70% at 50% 90%, rgba(255,77,77,0.06), transparent 50%);
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,255,200,0.12), transparent 50%),
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,255,200,0.08), transparent 50%),
+      radial-gradient(ellipse 90% 70% at 50% 90%, rgba(0,255,200,0.06), transparent 50%);
     pointer-events: none;
     z-index: -1;
   }
@@ -290,8 +294,8 @@
   /* 白天模式：星云改为柔和光晕 */
   [data-theme="light"] body::after {
     background:
-      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(255,107,53,0.06), transparent 50%),
-      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,229,204,0.04), transparent 50%);
+      radial-gradient(ellipse 80% 50% at 20% 20%, rgba(0,255,200,0.06), transparent 50%),
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba(0,255,200,0.04), transparent 50%);
   }
 
   /* ===== 顶部导航 ===== */
@@ -327,12 +331,12 @@
     width: 32px;
     height: 32px;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 0 8px rgba(255,107,53,0.3));
+    filter: drop-shadow(0 0 8px rgba(0,255,200,0.3));
   }
 
   .navbar-brand:hover .logo {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 12px rgba(255,107,53,0.5));
+    filter: drop-shadow(0 0 12px rgba(0,255,200,0.5));
   }
 
   .navbar-brand .logo .claw-left {
@@ -418,7 +422,7 @@
     width: 96px;
     height: 96px;
     margin-bottom: 32px;
-    filter: drop-shadow(0 0 20px rgba(255,107,53,0.4));
+    filter: drop-shadow(0 0 20px rgba(0,255,200,0.4));
     animation: float 4s ease-in-out infinite;
     cursor: pointer;
     transition: transform 0.3s ease, filter 0.3s ease;
@@ -427,7 +431,7 @@
   .hero-icon:hover {
     transform: scale(1.1);
     animation: none;
-    filter: drop-shadow(0 0 30px rgba(255,107,53,0.6));
+    filter: drop-shadow(0 0 30px rgba(0,255,200,0.6));
   }
 
   /* SVG 内部动画 */
@@ -472,14 +476,14 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,107,53,0.12);
+    background: rgba(0,255,200,0.12);
     color: var(--primary-light);
     padding: 8px 16px;
     border-radius: var(--radius-full);
     font-size: 14px;
     font-weight: 600;
     margin-top: 24px;
-    border: 1px solid rgba(255,107,53,0.2);
+    border: 1px solid rgba(0,255,200,0.2);
   }
 
   .version-badge .dot {
@@ -605,21 +609,21 @@
 
   .update-card.latest::before {
     background: var(--accent);
-    box-shadow: 0 0 12px rgba(0,229,204,0.5);
+    box-shadow: 0 0 12px rgba(0,255,200,0.5);
   }
 
   .update-card.latest {
-    border-color: rgba(0,229,204,0.2);
+    border-color: rgba(0,255,200,0.2);
   }
 
   .update-card.new-unread {
-    border-color: rgba(255,107,53,0.3);
-    box-shadow: 0 0 24px rgba(255,107,53,0.08);
+    border-color: rgba(0,255,200,0.3);
+    box-shadow: 0 0 24px rgba(0,255,200,0.08);
   }
 
   .update-card.new-unread::before {
     background: var(--primary);
-    box-shadow: 0 0 16px rgba(255,107,53,0.6);
+    box-shadow: 0 0 16px rgba(0,255,200,0.6);
     animation: pulse 2s infinite;
   }
 
@@ -653,12 +657,12 @@
     letter-spacing: 0.02em;
   }
 
-  .tag-major { background: rgba(255,77,77,0.12); color: var(--danger); }
-  .tag-minor { background: rgba(255,107,53,0.12); color: var(--primary-light); }
-  .tag-patch { background: rgba(0,229,204,0.12); color: var(--accent); }
+  .tag-major { background: rgba(0,255,200,0.12); color: var(--danger); }
+  .tag-minor { background: rgba(0,255,200,0.12); color: var(--primary-light); }
+  .tag-patch { background: rgba(0,255,200,0.12); color: var(--accent); }
   .tag-new { background: rgba(254,202,87,0.12); color: var(--warning); }
-  .tag-sync { background: rgba(0,229,204,0.1); color: var(--accent); font-size: 11px; }
-  .tag-portable { background: rgba(167,139,250,0.12); color: #A78BFA; }
+  .tag-sync { background: rgba(0,255,200,0.1); color: var(--accent); font-size: 11px; }
+  .tag-portable { background: rgba(167,139,250,0.12); color: var(--accent); }
 
   .update-date {
     font-size: 13px;
@@ -717,8 +721,8 @@
     font-size: 13px;
     font-weight: 500;
     color: var(--primary);
-    background: rgba(255,107,53,0.08);
-    border: 1px solid rgba(255,107,53,0.15);
+    background: rgba(0,255,200,0.08);
+    border: 1px solid rgba(0,255,200,0.15);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -726,8 +730,8 @@
   }
 
   .changes-toggle:hover {
-    background: rgba(255,107,53,0.15);
-    border-color: rgba(255,107,53,0.3);
+    background: rgba(0,255,200,0.15);
+    border-color: rgba(0,255,200,0.3);
   }
 
   .changes-toggle .toggle-arrow {
@@ -741,14 +745,14 @@
   }
 
   [data-theme="light"] .changes-toggle {
-    background: rgba(255,107,53,0.06);
-    border-color: rgba(255,107,53,0.2);
+    background: rgba(0,255,200,0.06);
+    border-color: rgba(0,255,200,0.2);
     color: var(--primary);
   }
 
   [data-theme="light"] .changes-toggle:hover {
-    background: rgba(255,107,53,0.12);
-    border-color: rgba(255,107,53,0.35);
+    background: rgba(0,255,200,0.12);
+    border-color: rgba(0,255,200,0.35);
   }
 
   .change-icon {
@@ -764,10 +768,10 @@
     margin-top: 1px;
   }
 
-  .change-icon.added { background: rgba(0,229,204,0.12); color: var(--accent); }
-  .change-icon.fixed { background: rgba(255,107,53,0.12); color: var(--primary-light); }
+  .change-icon.added { background: rgba(0,255,200,0.12); color: var(--accent); }
+  .change-icon.fixed { background: rgba(0,255,200,0.12); color: var(--primary-light); }
   .change-icon.changed { background: rgba(254,202,87,0.12); color: var(--warning); }
-  .change-icon.removed { background: rgba(255,77,77,0.12); color: var(--danger); }
+  .change-icon.removed { background: rgba(0,255,200,0.12); color: var(--danger); }
 
   /* ===== 更新弹窗 ===== */
   .modal-overlay {
@@ -846,7 +850,7 @@
 
   /* ===== 更新通知弹窗 ===== */
   .notify-modal .modal {
-    border-color: rgba(255,107,53,0.2);
+    border-color: rgba(0,255,200,0.2);
   }
 
   .notify-icon {
@@ -953,7 +957,7 @@
   .form-input:focus, .form-textarea:focus, .form-select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(255,107,53,0.15);
+    box-shadow: 0 0 0 3px rgba(0,255,200,0.15);
   }
 
   .form-textarea { min-height: 80px; resize: vertical; }
@@ -985,11 +989,11 @@
     padding: 4px;
     border-radius: 4px;
   }
-  .remove-change:hover { background: rgba(255,77,77,0.1); }
+  .remove-change:hover { background: rgba(0,255,200,0.1); }
 
   .add-change-btn {
-    background: rgba(255,107,53,0.08);
-    border: 1px dashed rgba(255,107,53,0.25);
+    background: rgba(0,255,200,0.08);
+    border: 1px dashed rgba(0,255,200,0.25);
     color: var(--primary-light);
     padding: 8px;
     border-radius: var(--radius-sm);
@@ -999,7 +1003,7 @@
     margin-top: 8px;
     transition: all 0.2s;
   }
-  .add-change-btn:hover { background: rgba(255,107,53,0.15); }
+  .add-change-btn:hover { background: rgba(0,255,200,0.15); }
 
   /* ===== 密码输入 ===== */
   .password-prompt {
@@ -1077,7 +1081,7 @@
     gap: 8px;
   }
 
-  .toast.success { border-color: rgba(0,229,204,0.3); }
+  .toast.success { border-color: rgba(0,255,200,0.3); }
   .toast.success::before { content: '\2713'; color: var(--accent); font-weight: 700; }
 
   @keyframes slideIn {
@@ -1179,7 +1183,7 @@
   }
 
   .tab-btn.active[data-tab="portable"] {
-    background: #A78BFA;
+    background: var(--accent);
     box-shadow: 0 0 20px rgba(167,139,250,0.4);
   }
 
@@ -1204,13 +1208,13 @@
   }
 
   body.portable-mode .version-badge .dot {
-    background: #A78BFA;
+    background: var(--accent);
     box-shadow: 0 0 8px rgba(167,139,250,0.6);
   }
 
   body.portable-mode .tag-portable {
     background: rgba(167,139,250,0.2);
-    color: #A78BFA;
+    color: var(--accent);
   }
 
   body.portable-mode .update-card:hover {
@@ -1219,7 +1223,7 @@
 
   body.portable-mode .change-icon.added {
     background: rgba(167,139,250,0.15);
-    color: #A78BFA;
+    color: var(--accent);
   }
 
   @keyframes portablePulse {
@@ -1236,23 +1240,25 @@
     <svg class="logo" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="nav-lobster-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ff4d4d"/>
-          <stop offset="100%" stop-color="#991b1b"/>
+          <stop offset="0%" stop-color="#00ffc8"/>
+          <stop offset="100%" stop-color="#00d4a8"/>
         </linearGradient>
       </defs>
       <path d="M60 10 C30 10 15 35 15 55 C15 75 30 95 45 100 L45 110 L55 110 L55 100 C55 100 60 102 65 100 L65 110 L75 110 L75 100 C90 95 105 75 105 55 C105 35 90 10 60 10Z" fill="url(#nav-lobster-gradient)"/>
       <path class="claw-left" d="M20 45 C5 40 0 50 5 60 C10 70 20 65 25 55 C28 48 25 45 20 45Z" fill="url(#nav-lobster-gradient)"/>
       <path class="claw-right" d="M100 45 C115 40 120 50 115 60 C110 70 100 65 95 55 C92 48 95 45 100 45Z" fill="url(#nav-lobster-gradient)"/>
-      <path class="antenna" d="M45 15 Q35 5 30 8" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
-      <path class="antenna" d="M75 15 Q85 5 90 8" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="45" cy="35" r="6" fill="#050810"/>
-      <circle cx="75" cy="35" r="6" fill="#050810"/>
-      <circle class="eye-glow" cx="46" cy="34" r="2.5" fill="#00e5cc"/>
-      <circle class="eye-glow" cx="76" cy="34" r="2.5" fill="#00e5cc"/>
+      <path class="antenna" d="M45 15 Q35 5 30 8" stroke="#00ffc8" stroke-width="3" stroke-linecap="round"/>
+      <path class="antenna" d="M75 15 Q85 5 90 8" stroke="#00ffc8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="45" cy="35" r="6" fill="#041c1c"/>
+      <circle cx="75" cy="35" r="6" fill="#041c1c"/>
+      <circle class="eye-glow" cx="46" cy="34" r="2.5" fill="#00ffc8"/>
+      <circle class="eye-glow" cx="76" cy="34" r="2.5" fill="#00ffc8"/>
     </svg>
     <span>OpenClaw 中文更新日志</span>
   </a>
   <div class="navbar-actions">
+    <a href="https://yuai-r.cn/" class="btn btn-ghost btn-sm" style="text-decoration:none;letter-spacing:.1em;font-size:.78em;text-transform:uppercase">yu.ai</a>
+    <a href="https://yuai-r.cn/openclaw/" class="btn btn-ghost btn-sm" style="text-decoration:none;letter-spacing:.1em;font-size:.78em;text-transform:uppercase">使用说明</a>
     <!-- 管理入口已隐藏，按 Ctrl+Shift+A 打开 -->
     <button class="btn btn-ghost btn-sm" id="themeToggle" onclick="toggleTheme()" title="切换日/夜模式">
       <span id="themeIcon">🌙</span>
@@ -1267,8 +1273,8 @@
     <svg class="hero-icon" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="lobster-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#ff4d4d"/>
-          <stop offset="100%" stop-color="#991b1b"/>
+          <stop offset="0%" stop-color="#00ffc8"/>
+          <stop offset="100%" stop-color="#00d4a8"/>
         </linearGradient>
       </defs>
       <!-- Body -->
@@ -1278,13 +1284,13 @@
       <!-- Right Claw -->
       <path class="claw-right" d="M100 45 C115 40 120 50 115 60 C110 70 100 65 95 55 C92 48 95 45 100 45Z" fill="url(#lobster-gradient)"/>
       <!-- Antenna -->
-      <path class="antenna" d="M45 15 Q35 5 30 8" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
-      <path class="antenna" d="M75 15 Q85 5 90 8" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
+      <path class="antenna" d="M45 15 Q35 5 30 8" stroke="#00ffc8" stroke-width="3" stroke-linecap="round"/>
+      <path class="antenna" d="M75 15 Q85 5 90 8" stroke="#00ffc8" stroke-width="3" stroke-linecap="round"/>
       <!-- Eyes -->
-      <circle cx="45" cy="35" r="6" fill="#050810"/>
-      <circle cx="75" cy="35" r="6" fill="#050810"/>
-      <circle class="eye-glow" cx="46" cy="34" r="2.5" fill="#00e5cc"/>
-      <circle class="eye-glow" cx="76" cy="34" r="2.5" fill="#00e5cc"/>
+      <circle cx="45" cy="35" r="6" fill="#041c1c"/>
+      <circle cx="75" cy="35" r="6" fill="#041c1c"/>
+      <circle class="eye-glow" cx="46" cy="34" r="2.5" fill="#00ffc8"/>
+      <circle class="eye-glow" cx="76" cy="34" r="2.5" fill="#00ffc8"/>
     </svg>
     <h1>更新日志</h1>
     <p>查看 OpenClaw 的最新版本更新内容，每次更新都会在这里第一时间通知你</p>
