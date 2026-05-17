@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yuluyangguang1.github.io/openclaw-updates/sitemap.xml
+Sitemap: https://yuai-r.cn/openclaw/changelog/sitemap.xml
